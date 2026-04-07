@@ -1,0 +1,48 @@
+/* index.css */
+
+/* Estilo base para las cards tipo libro */
+.libro {
+    border-radius: 12px;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.libro:hover {
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.libro img {
+    border-radius: 8px;
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.btn-dark, .btn-primary, .btn-success, .btn-warning, .btn-danger {
+    transition: background 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-dark:hover, .btn-primary:hover, .btn-success:hover, .btn-warning:hover, .btn-danger:hover {
+    background-color: #000;
+    color: #fff;
+}
