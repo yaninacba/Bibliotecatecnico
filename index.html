@@ -13,10 +13,30 @@
 
 <title>Biblioteca del Técnico</title>
 
-<link rel="stylesheet" href="index.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<style>
 
+body{
+background:#f4f6f8;
+}
+
+.hero{
+background:#1f2937;
+color:white;
+padding:60px;
+text-align:center;
+}
+
+.kit-card{
+transition:0.3s;
+}
+
+.kit-card:hover{
+transform:scale(1.03);
+}
+
+</style>
 
 </head>
 <script>(function(s){s.dataset.zone='10754023',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
@@ -73,62 +93,31 @@
 </section>
 
 <!-- KITS -->
+
 <div class="container mt-5">
 
-  <h3 class="mb-4">🔥 Recursos recomendados</h3>
+<div class="row g-4">
 
-  <div class="row g-4">
+<!-- KIT 1 -->
 
-    <!-- LIBRO -->
-    <div class="col-md-4">
-      <div class="card libro text-center p-3 h-100">
+<div class="col-md-4" id="diagnostico">
 
-        <img src="libro.jpg" class="mx-auto mb-3" style="width:150px;">
+<div class="card kit-card">
 
-        <h5>Curso Soporte Técnico Tomo 1</h5>
-        <p>Aprendé a identificar componentes y fallas.</p>
+<div class="card-body">
 
-        <a href="detalle1.html" class="btn btn-dark">
-          📖 Abrir libro
-        </a>
+<h5 class="card-title">Curso Soporte Tecnico Tomo 1</h5>
 
-      </div>
-    </div>
+<p class="card-text">
+Identifica los componentes de la pc, para luego poder conocer las fallas.
+</p>
 
-    <!-- LIBRO -->
-    <div class="col-md-4">
-      <div class="card libro text-center p-3 h-100">
+<a href="https://mega.nz/file/3wx3HRyY#RT_DJVqVk7RqwD6ZV-U9unhnCeN_-SBmqljfmG8D0XQ" class="btn btn-primary">
+Descargar
+</a>
 
-        <img src="https://via.placeholder.com/150x200" class="mx-auto mb-3" style="width:150px;">
-
-        <h5>Herramientas de Booteo</h5>
-        <p>Utilidades para reparar sistemas y arranque.</p>
-
-        <a href="boot.html" class="btn btn-dark">
-          📖 Abrir libro
-        </a>
-
-      </div>
-    </div>
-
-    <!-- LIBRO -->
-    <div class="col-md-4">
-      <div class="card libro text-center p-3 h-100">
-
-        <img src="https://via.placeholder.com/150x200" class="mx-auto mb-3" style="width:150px;">
-
-        <h5>Kit de Redes</h5>
-        <p>Herramientas para diagnóstico y drivers.</p>
-
-        <a href="detalle-red.html" class="btn btn-dark">
-          📖 Abrir libro
-        </a>
-
-      </div>
-    </div>
-
-  </div>
-
+</div>
+</div>
 </div>
 
 <!-- KIT 2 -->
