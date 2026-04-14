@@ -106,6 +106,35 @@ body {
   background: #1ebe5d;
 }
 
+.btn-soporte-glow {
+  background: #ff3c3c;
+  color: white !important;
+  border-radius: 30px;
+  padding: 8px 18px;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 60, 60, 0.6);
+  animation: glowPulse 1.5s infinite;
+}
+
+.btn-soporte-glow:hover {
+  background: #ff1a1a;
+}
+
+/* Animación de brillo */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 60, 60, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 60, 60, 1);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 60, 60, 0.6);
+  }
+}
 </style>
 
 </head>
@@ -120,11 +149,33 @@ body {
 </button>
 <div class="collapse navbar-collapse" id="menu">
 <ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link" href="#diagnostico">Diagnóstico</a></li>
-<li class="nav-item"><a class="nav-link" href="linux.html">Linux</a></li>
-<li class="nav-item"><a class="nav-link" href="linux.html">Curso Soporte Tecnico</a></li>
-<li class="nav-item"><a class="nav-link" href="usb.html">USB Técnico</a></li>
-<li class="nav-item"><a class="nav-link" href="manuales.html">Manuales oficiales de mantenimiento</a></li>
+
+<li class="nav-item">
+  <a class="nav-link" href="#">Inicio</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="boot.html">Reparar PC</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="usb.html">USB Técnico</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="manuales.html">Manuales</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="cursos.html">Cursos</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link btn btn-danger text-white ms-2" href="soporte.html">
+    🛠️ Soporte
+  </a>
+</li>
+
 </ul>
 </div>
 </div>
