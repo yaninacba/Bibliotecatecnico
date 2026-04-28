@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Empleos It</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+        :root {
+            --neon-blue: #00d2ff;
+            --neon-red: #f51c15;
+            --neon-purple: #9d50bb;
+            --glass-bg: rgba(212, 24, 24, 0.05);
+        }
+
+        body {
+            background: #0f172a; /* Fondo oscuro para que resalte el neón */
+            color: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero h1 {
+            font-weight: 600;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* --- NEON GLASS CARD STYLE --- */
+        .kit-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 10, 10, 0.1);
+            transition: all 0.4s ease;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Colores de neón por ID o Clase */
+        .card-blue { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
+        .card-red { border-color: var(--neon-red); box-shadow: 0 0 15px rgba(223, 52, 9, 0.2); }
+        .card-purple { border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(157, 80, 187, 0.2); }
+
+        .kit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-portada {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .icono-portada {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .card-body {
+            padding: 25px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        /* Botones estilo neón */
+        .btn-neon {
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: 2px solid transparent;
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-blue { background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); }
+        .btn-orange { background: var(--neon-orange); box-shadow: 0 0 10px var(--neon-orange); }
+        .btn-purple { background: var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple); }
+
+        .btn-neon:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px currentColor;
+            color: white;
+        }
+
+</style>
+
+</head>
+<script>(function(s){s.dataset.zone='10737929',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<body>
+
+<!-- MENU -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse justify-content-center" id="menu">
+
+<ul class="navbar-nav mx-auto">
+
+<li class="nav-item">
+  <a class="nav-link" href="index.html">Inicio</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="boot.html">Reparar PC</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="usb.html">USB Técnico</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="manuales.html">Manuales</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="cursos.html">Cursos</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link btn btn-danger text-white ms-2" href="soporte.html">
+    🛠️ Soporte
+  </a>
+</li>
+
+</ul>
+
+</div>
+</div>
+</nav>
+<section class="hero">
+
+<h1>Sitios de Empleo It</h1>
+<p>Explora estas plataformas con vacantes it en Latam</p>
+
+</section>
+
+<div class="container mt-5">
+
+  <div class="row g-4">
+
+ <!-- Hiring Cafe -->
+
+    <div class="col-md-4">
+      <div class="kit-card card-purple">
+
+        <div class="card-portada" style="color: var(--neon-purple);">
+          <i class="fa-solid fa-laptop-code icono-portada"></i>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">Get on Board</h5>
+
+          <p class="card-text">
+            Plataforma especializada en trabajos IT en LATAM.
+          </p>
+
+          <a href="https://hiring.cafe/" target="_blank" class="btn-neon btn-purple">
+            💼 Ver empleos
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GET ON BOARD -->
+    <div class="col-md-4">
+      <div class="kit-card card-purple">
+
+        <div class="card-portada" style="color: var(--neon-purple);">
+          <i class="fa-solid fa-laptop-code icono-portada"></i>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">Get on Board</h5>
+
+          <p class="card-text">
+            Plataforma especializada en trabajos IT en LATAM.
+          </p>
+
+          <a href="https://www.getonbrd.com" target="_blank" class="btn-neon btn-purple">
+            💼 Ver empleos
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TORRE -->
+    <div class="col-md-4">
+      <div class="kit-card card-red">
+
+        <div class="card-portada" style="color: var(--neon-red);">
+          <i class="fa-solid fa-briefcase icono-portada"></i>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">Torre</h5>
+
+          <p class="card-text">
+            Plataforma con empleos remotos y oportunidades IT globales.
+          </p>
+
+          <a href="https://torre.ai" target="_blank" class="btn-neon btn-blue">
+            💼 Ver empleos
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- INDEED -->
+    <div class="col-md-4">
+      <div class="kit-card card-purple">
+
+        <div class="card-portada" style="color: var(--neon-purple);">
+          <i class="fa-solid fa-globe icono-portada"></i>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">Indeed</h5>
+
+          <p class="card-text">
+            Buscador global de empleos con miles de vacantes IT.
+          </p>
+
+          <a href="https://www.indeed.com" target="_blank" class="btn-neon btn-purple">
+            💼 Ver empleos
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ALIANTEC -->
+    <div class="col-md-4">
+      <div class="kit-card card-red">
+
+        <div class="card-portada" style="color: var(--neon-red);">
+          <i class="fa-solid fa-user-tie icono-portada"></i>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">Aliantec</h5>
+
+          <p class="card-text">
+           Las mejores oportunidades laborales en IT
+          </p>
+
+          <a href="https://www.aliantec.com/" target="_blank" class="btn-neon btn-blue">
+            💼 Ver empleos
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="text-center p-4 mt-5" style="border-top: 1px solid rgba(255,255,255,0.1)">
+  </script>
+  <p>© 2026 Biblioteca del Técnico - Recursos IT de Vanguardia</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--  scripts publi (adsterra) -->
+<script> atOptions = { 'key' : '1fb61a0ac6eb8bbb639f004b0a94c69c', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> <script src="https://www.highperformanceformat.com/1fb61a0ac6eb8bbb639f004b0a94c69c/invoke.js"></script>
+
+</body>
+</html>
