@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Recursos para tecnicos, reparacion de pc, notebook, all in one">
-    <title>Biblioteca del Técnico</title>
+    <title>Biblioteca del Técnico | Noticias Tech</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,26 +15,49 @@
             --neon-blue: #00d2ff;
             --neon-orange: #ff8c00;
             --neon-purple: #9d50bb;
+            --neon-green: #00ffaa;
             --glass-bg: rgba(255, 255, 255, 0.05);
+            --card-hover: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background: #0f172a; /* Fondo oscuro para que resalte el neón */
+            background: #0f172a;
             color: #f8fafc;
             font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
         }
 
         .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), 
                         url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            padding: 80px 20px;
+            padding: 70px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .hero h1 {
-            font-weight: 600;
-            text-shadow: 0 0 10px var(--neon-blue);
+            font-weight: 700;
+            text-shadow: 0 0 15px var(--neon-blue);
+            font-size: 3rem;
         }
 
         /* --- NEON GLASS CARD STYLE --- */
@@ -43,22 +66,20 @@
             backdrop-filter: blur(12px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             height: 100%;
             overflow: hidden;
-            position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        /* Colores de neón por ID o Clase */
         .card-blue { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
         .card-orange { border-color: var(--neon-orange); box-shadow: 0 0 15px rgba(255, 140, 0, 0.2); }
         .card-purple { border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(157, 80, 187, 0.2); }
 
         .kit-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
             background: rgba(255, 255, 255, 0.08);
         }
 
@@ -67,26 +88,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .icono-portada {
-            font-size: 3.5rem;
-            filter: drop-shadow(0 0 10px currentColor);
+            font-size: 3.8rem;
+            filter: drop-shadow(0 0 12px currentColor);
         }
 
         .card-body {
             padding: 25px;
             text-align: center;
+            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 15px;
         }
 
@@ -94,9 +114,9 @@
             font-size: 0.9rem;
             color: #cbd5e1;
             margin-bottom: 20px;
+            line-height: 1.5;
         }
 
-        /* Botones estilo neón */
         .btn-neon {
             border-radius: 50px;
             padding: 10px 25px;
@@ -107,57 +127,194 @@
             border: 2px solid transparent;
             color: white;
             text-decoration: none;
+            display: inline-block;
         }
 
         .btn-blue { background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); }
         .btn-orange { background: var(--neon-orange); box-shadow: 0 0 10px var(--neon-orange); }
         .btn-purple { background: var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple); }
+        .btn-green { background: var(--neon-green); color: #0f172a; box-shadow: 0 0 10px var(--neon-green); }
 
         .btn-neon:hover {
             filter: brightness(1.2);
             box-shadow: 0 0 20px currentColor;
             color: white;
+            transform: scale(1.02);
         }
 
-        /* Sección de presentación personalizada */
         .intro-box {
-            background: rgba(0, 102, 204, 0.1);
-            backdrop-filter: blur(5px);
-            padding: 30px;
-            border-radius: 20px;
+            background: rgba(0, 102, 204, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 35px;
+            border-radius: 30px;
             margin: 40px 0;
-            border-left: 5px solid var(--neon-blue);
+            border-left: 6px solid var(--neon-blue);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ========= SECCION NOTICIAS ========= */
+        .news-section {
+            margin: 60px 0 40px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title span {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(0,210,255,0.3);
+        }
+        .news-card {
+            background: rgba(20, 30, 55, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 12px 35px rgba(0, 210, 255, 0.2);
+        }
+        .news-header {
+            padding: 20px 25px 10px 25px;
+            border-bottom: 1px dashed rgba(255,255,255,0.15);
+        }
+        .news-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+        }
+        .news-date {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-body {
+            padding: 20px 25px;
+        }
+        .news-intro {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .news-full {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, margin 0.2s ease;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 0 20px;
+            margin-top: 0;
+        }
+        .news-full.show {
+            max-height: 500px;   /* suficiente para contenido extra */
+            padding: 20px;
+            margin-top: 20px;
+            transition: max-height 0.6s ease-in;
+        }
+        .news-full p {
+            color: #cbd5e6;
+            margin-bottom: 12px;
+        }
+        .btn-read-more {
+            background: transparent;
+            border: 1.5px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-read-more:hover {
+            background: var(--neon-blue);
+            color: #0f172a;
+            box-shadow: 0 0 12px var(--neon-blue);
+        }
+        .news-footer {
+            padding: 10px 25px 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .badge-tech {
+            background: rgba(0,210,255,0.2);
+            color: var(--neon-blue);
+            border-radius: 50px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
         .btn-soporte-wsp {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 9999;
             background: #25D366;
             color: white;
-            padding: 14px 24px;
-            border-radius: 30px;
+            padding: 14px 28px;
+            border-radius: 40px;
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 0 18px rgba(37, 211, 102, 0.6);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-soporte-wsp:hover {
+            transform: scale(1.05);
+            background: #20b859;
+            color: white;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #0a0f1c;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .news-title { font-size: 1.3rem; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
-
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
+        <a class="navbar-brand fw-bold" href="#" style="color: var(--neon-blue);">📘 TecnoLib</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="menu">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#recursos">Recursos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#noticias">Noticias Tech</a></li>
                 <li class="nav-item"><a class="nav-link" href="manuales.html">Manuales</a></li>
                 <li class="nav-item"><a class="nav-link" href="cursos.html">Cursos</a></li>
-                <li class="nav-item"><a class="nav-link" href="empleos.html">Empleos It</a></li>
+                <li class="nav-item"><a class="nav-link" href="empleos.html">Empleos IT</a></li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-danger text-white ms-2 px-3" href="soporte.html">🛠️ Soporte</a>
                 </li>
@@ -168,185 +325,241 @@
 
 <section class="hero">
     <h1>📚 Biblioteca del Técnico</h1>
-    <p class="lead">Herramientas y kits de élite para soporte técnico</p>
-</section>
-<section class="hero">
-    <h1>📚 Biblioteca del Técnico</h1>
-    <p class="lead">
-        Herramientas y kits de élite para soporte técnico
-    </p>
+    <p class="lead">Recursos, herramientas y las últimas noticias del mundo IT</p>
 </section>
 
-<!-- ========================= -->
-<!-- 📰 ACTUALIDAD TECNOLÓGICA -->
-<!-- ========================= -->
-
-<section id="noticias" class="noticias-section">
-
-    <div class="section-title">
-        <h2>📰 Actualidad Tecnológica</h2>
-        <p>
-            Últimas noticias, becas y novedades del mundo IT
-        </p>
-    </div>
-
-    <div class="noticias-grid">
-
-        <!-- CARD 1 -->
-        <article class="noticia-card">
-
-            <img src="img/aws.jpg" alt="AWS Becas">
-
-            <div class="contenido-noticia">
-
-                <span class="fecha">
-                    18 Mayo 2026
-                </span>
-
-                <h3>
-                    Convenio con AWS y nuevas becas IT
-                </h3>
-
-                <p>
-                    Nuevas capacitaciones gratuitas orientadas
-                    a cloud computing y tecnologías digitales.
-                </p>
-
-                <a href="noticias/aws-becas.html" class="btn-leer">
-                    Noticia Completa →
-                </a>
-
-            </div>
-
-        </article>
-
-        
-
-        </article>
-
-    </div>
-
-</section>
 <div class="container">
+    <!-- Presentación personal -->
     <div class="intro-box">
-        <h2 class="h4">👋 ¡Hola!</span></h2>
-        <p>Soy especialista en soporte Técnico en <strong>Córdoba Capital</strong>. ¿Problemas con tu PC o Notebook? Ofrezco soporte rápido y profesional.</p>
+        <h2 class="h4">👋 ¡Hola, soy tu especialista en soporte técnico!</h2>
+        <p>Soy técnico en <strong>Córdoba Capital</strong>, apasionado por la reparación de PC, notebooks y soluciones informáticas. ¿Problemas con tu equipo? Ofrezco asistencia rápida y profesional.</p>
         <div class="d-flex gap-3 flex-wrap">
-            <a href="https://wa.me/5493512039284?text=Remoto" class="btn btn-neon btn-blue">💻 Soporte Remoto</a>
-            <a href="https://wa.me/5493512039284?text=Presencial" class="btn btn-outline-info btn-neon" style="background:transparent; border-color: var(--neon-blue)">🏠 Presencial</a>
+            <a href="https://wa.me/5493512039284?text=Remoto" class="btn-neon btn-blue">💻 Soporte Remoto</a>
+            <a href="https://wa.me/5493512039284?text=Presencial" class="btn-neon" style="background:transparent; border-color: var(--neon-blue); color: var(--neon-blue);">🏠 Presencial</a>
         </div>
     </div>
 
-    <div class="row g-4 mb-5">
-        
-        <div class="col-md-4">
-            <div class="kit-card card-blue">
-                <div class="card-portada" style="color: var(--neon-blue);">
-                    <i class="fa-solid fa-book-open icono-portada"></i>
+    <!-- SECCIÓN NOTICIAS CON EXPANSIÓN -->
+    <div id="noticias" class="news-section">
+        <h2 class="section-title">📰 <span>Noticias y Novedades Tecnológicas</span> 🔥</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <!-- NOTICIA 1 -->
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="news-title">🔧 Windows 12: Primeros filtrados y novedades para técnicos</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 15 Mayo 2026 • <span class="badge-tech">Actualidad</span></div>
+                    </div>
+                    <div class="news-body">
+                        <div class="news-intro">
+                            Microsoft estaría preparando una versión revolucionaria de Windows con integración total de IA y un nuevo núcleo optimizado para hardware moderno. 
+                            Las filtraciones indican mejoras en el rendimiento para equipos de gama media y herramientas de diagnóstico integradas.
+                        </div>
+                        <div class="news-full" id="news-full-1">
+                            <p>📌 <strong>Detalles completos:</strong> Según fuentes internas, Windows 12 contará con un "Modo técnico avanzado" que permitirá diagnosticar fallos de hardware sin necesidad de software externo. Además, se espera que la instalación sea un 40% más rápida y el soporte para recuperación automática de controladores mediante IA.</p>
+                            <p>🛠️ Para los reparadores de PC, esto significa que las herramientas como el símbolo del sistema y PowerShell tendrán nuevos comandos predictivos. También se rumorea un centro de reparación nativo que detecta componentes defectuosos. ¡Revolucionario para el soporte técnico!</p>
+                            <p><i class="fa-regular fa-clock"></i> Se espera una versión preliminar a finales de 2026.</p>
+                        </div>
+                    </div>
+                    <div class="news-footer">
+                        <button class="btn-read-more" onclick="toggleNews(1)"><span>Leer más</span> <i class="fas fa-chevron-down"></i></button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Curso Técnico Tomo 1</h5>
-                    <p class="card-text">Identifica los componentes de la pc para diagnosticar fallas con precisión.</p>
-                    <a href="https://mega.nz/file/3wx3HRyY#RT_DJVqVk7RqwD6ZV-U9unhnCeN_-SBmqljfmG8D0XQ" class="btn-neon btn-blue">📥 Descargar</a>
+
+                <!-- NOTICIA 2 -->
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="news-title">⚡ Nueva vulnerabilidad crítica en procesadores Intel: Guía de mitigación</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 10 Mayo 2026 • <span class="badge-tech">Seguridad</span></div>
+                    </div>
+                    <div class="news-body">
+                        <div class="news-intro">
+                            Investigadores descubrieron una falla de espectro en chips Intel de 12va y 13va generación que permite robo de información sensible. 
+                            Técnicos de todo el mundo deben actualizar microcódigo y BIOS para proteger equipos de clientes.
+                        </div>
+                        <div class="news-full" id="news-full-2">
+                            <p>🔐 <strong>Impacto y solución:</strong> La vulnerabilidad bautizada "Spectre-BTI" afecta a entornos virtualizados y sistemas con múltiples núcleos. Como especialistas, se recomienda instalar las actualizaciones de firmware proporcionadas por fabricantes de placas madres (ASUS, MSI, Gigabyte) y deshabilitar la predicción de ramas en casos extremos.</p>
+                            <p>📌 Herramientas como <strong>Intel-SA-00812</strong> permiten verificar si el sistema está parcheado. También se lanzó un script de detección en nuestro kit de herramientas técnicas. Mantener los equipos actualizados es crucial.</p>
+                            <p>🔧 Para técnicos: Si trabajan con equipos empresariales, apliquen el parche vía actualización de UEFI/BIOS y revisen el rendimiento posterior.</p>
+                        </div>
+                    </div>
+                    <div class="news-footer">
+                        <button class="btn-read-more" onclick="toggleNews(2)"><span>Leer más</span> <i class="fas fa-chevron-down"></i></button>
+                    </div>
+                </div>
+
+                <!-- NOTICIA 3 - IA y reparación -->
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="news-title">🤖 La IA llega al diagnóstico de PCs: Asistentes predictivos para técnicos</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 5 Mayo 2026 • <span class="badge-tech">Innovación</span></div>
+                    </div>
+                    <div class="news-body">
+                        <div class="news-intro">
+                            Nuevas herramientas con inteligencia artificial prometen agilizar el diagnóstico de fallas en hardware. Desde análisis de BSOD hasta predicción de fallos de disco, la IA está cambiando el soporte técnico.
+                        </div>
+                        <div class="news-full" id="news-full-3">
+                            <p>💡 <strong>¿Cómo funciona?</strong> Programas como "TechAI Analyzer" analizan los registros del sistema, voltajes y SMART de discos en segundos, entregando un informe detallado con posibles soluciones. Esto reduce el tiempo de diagnóstico hasta en un 70%.</p>
+                            <p>🔌 Ventajas para técnicos independientes: podrás ofrecer servicios más rápidos y precisos. Además, estas plataformas aprenden de fallas comunes. Incluso algunos fabricantes integran chips de IA para autodiagnóstico.</p>
+                            <p>📢 En nuestra Biblioteca del Técnico próximamente añadiremos un listado de las mejores IA para reparación. ¡No te lo pierdas!</p>
+                        </div>
+                    </div>
+                    <div class="news-footer">
+                        <button class="btn-read-more" onclick="toggleNews(3)"><span>Leer más</span> <i class="fas fa-chevron-down"></i></button>
+                    </div>
+                </div>
+
+                <!-- NOTICIA 4 - GPU y minería-->
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="news-title">🎮 Caída de precios en GPUs usadas: Oportunidad para técnicos gamers</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 28 Abril 2026 • <span class="badge-tech">Hardware</span></div>
+                    </div>
+                    <div class="news-body">
+                        <div class="news-intro">
+                            El mercado de tarjetas gráficas usadas ha bajado considerablemente. Ideal para armar equipos económicos con gran rendimiento. ¿Qué tener en cuenta al comprar una GPU de segunda mano?
+                        </div>
+                        <div class="news-full" id="news-full-4">
+                            <p>💰 <strong>Guía para técnicos:</strong> Al adquirir GPUs usadas, es fundamental probar con herramientas como FurMark y verificar las temperaturas y artefactos visuales. Las RTX 3060 / RX 6600 se encuentran a precios récord (desde $150 USD).</p>
+                            <p>🔧 Recomendación: realizar tests de estrés por al menos 20 minutos, revisar que los ventiladores funcionen correctamente y pedir factura/comprobante. Si vas a revender equipos, esta puede ser una gran oportunidad para ofrecer PCs gaming a precios competitivos.</p>
+                            <p>📊 Según análisis, las GPUs usadas para minería bien mantenidas pueden tener una vida útil prolongada siempre que se les haga mantenimiento térmico.</p>
+                        </div>
+                    </div>
+                    <div class="news-footer">
+                        <button class="btn-read-more" onclick="toggleNews(4)"><span>Leer más</span> <i class="fas fa-chevron-down"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-4">
-            <div class="kit-card card-orange">
-                <div class="card-portada" style="color: var(--neon-orange);">
-                    <i class="fa-solid fa-compact-disc icono-portada"></i>
+    <!-- Recursos técnicos (sección ya existente) -->
+    <div id="recursos">
+        <h2 class="section-title mt-4">🛠️ <span>Kits y Herramientas Esenciales</span></h2>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="kit-card card-blue">
+                    <div class="card-portada" style="color: var(--neon-blue);">
+                        <i class="fa-solid fa-book-open icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Curso Técnico Tomo 1</h5>
+                        <p class="card-text">Identifica componentes de PC y diagnosticar fallas con precisión.</p>
+                        <a href="https://mega.nz/file/3wx3HRyY#RT_DJVqVk7RqwD6ZV-U9unhnCeN_-SBmqljfmG8D0XQ" class="btn-neon btn-blue">📥 Descargar</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Herramientas de Booteo</h5>
-                    <p class="card-text">Utilidades para reparar arranque e instalación de sistemas operativos.</p>
-                    <a href="boot.html" class="btn-neon btn-orange">📥 Descargar herramientas</a>
+            </div>
+            <div class="col-md-4">
+                <div class="kit-card card-orange">
+                    <div class="card-portada" style="color: var(--neon-orange);">
+                        <i class="fa-solid fa-compact-disc icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Herramientas de Booteo</h5>
+                        <p class="card-text">Utilidades para reparar arranque e instalación de SO.</p>
+                        <a href="boot.html" class="btn-neon btn-orange">📥 Descargar herramientas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kit-card card-purple">
+                    <div class="card-portada" style="color: var(--neon-purple);">
+                        <i class="fa-solid fa-network-wired icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Kit Herramientas de Red</h5>
+                        <p class="card-text">Diagnóstico de red, escaneo IP y drivers actualizados.</p>
+                        <a href="https://mega.nz/folder/CsogGBQY#QY_qwdZRiAq49u5WBKpXNw" class="btn-neon btn-purple">📥 Descargar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kit-card card-orange">
+                    <div class="card-portada" style="color: var(--neon-orange);">
+                        <i class="fa-solid fa-microchip icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">USB del Técnico</h5>
+                        <p class="card-text">Pack completo portable para llevar en pendrive.</p>
+                        <a href="usb.html" class="btn-neon btn-orange">📥 Descargar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kit-card card-blue">
+                    <div class="card-portada" style="color: var(--neon-blue);">
+                        <i class="fa-brands fa-linux icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Linux Tools</h5>
+                        <p class="card-text">Distros y herramientas Open Source para técnicos.</p>
+                        <a href="linux.html" class="btn-neon btn-blue">📥 Recursos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kit-card card-purple">
+                    <div class="card-portada" style="color: var(--neon-purple);">
+                        <i class="fa-solid fa-graduation-cap icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Cursos Gratuitos</h5>
+                        <p class="card-text">Ciberseguridad, programación y electrónica.</p>
+                        <a href="cursos.html" class="btn-neon btn-purple">📥 Aprender online</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kit-card card-blue">
+                    <div class="card-portada" style="color: var(--neon-blue);">
+                        <i class="fa-solid fa-briefcase icono-portada"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Empleos IT</h5>
+                        <p class="card-text">Sitios de empleo IT en Latam.</p>
+                        <a href="empleos.html" class="btn-neon btn-blue">💼 Ver empleos</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="kit-card card-purple">
-                <div class="card-portada" style="color: var(--neon-purple);">
-                    <i class="fa-solid fa-network-wired icono-portada"></i>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Kit Herramientas de Red</h5>
-                    <p class="card-text">Programas para diagnóstico de red, escaneo IP y drivers actualizados.</p>
-                    <a href="https://mega.nz/folder/CsogGBQY#QY_qwdZRiAq49u5WBKpXNw" class="btn-neon btn-purple">📥 Descargar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="kit-card card-orange">
-                <div class="card-portada" style="color: var(--neon-orange);">
-                    <i class="fa-solid fa-microchip icono-portada"></i>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">USB del Técnico</h5>
-                    <p class="card-text">Pack completo de herramientas portables para llevar en un pendrive.</p>
-                    <a href="usb.html" class="btn-neon btn-orange">📥 Descargar herramientas</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="kit-card card-blue">
-                <div class="card-portada" style="color: var(--neon-blue);">
-                    <i class="fa-brands fa-linux icono-portada"></i>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Linux </h5>
-                    <p class="card-text">Software, distros y juegos específicos para el mundo Open Source.</p>
-                    <a href="linux.html" class="btn-neon btn-blue">📥 Recursos</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="kit-card card-purple">
-                <div class="card-portada" style="color: var(--neon-purple);">
-                    <i class="fa-solid fa-graduation-cap icono-portada"></i>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Cursos Gratuitos</h5>
-                    <p class="card-text">Ciberseguridad, programación y electrónica avanzada sin costo.</p>
-                    <a href="cursos.html" class="btn-neon btn-purple">📥 Aprender online 100% gratis</a>
-                </div>
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="kit-card card-blue">
-                <div class="card-portada" style="color: var(--neon-blue);">
-                    <i class="fa-solid fa-briefcase icono-portada"></i>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Empleos It </h5>
-                    <p class="card-text">Sitios de empleo it en Latam</p>
-                    <a href="empleos.html" class="btn-neon btn-blue"> 💼 Ver empleos</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
-  
+<!-- Botón flotante soporte -->
+<a href="soporte.html" class="btn-soporte-wsp"><i class="fab fa-whatsapp"></i> Soporte ahora</a>
 
-
-<a href="soporte.html" class="btn-soporte-wsp">💬 Soporte ahora</a>
-
-<footer class="text-center p-4 mt-5" style="border-top: 1px solid rgba(255,255,255,0.1)">
-  </script>
-  <p>© 2026 Biblioteca del Técnico - Recursos IT de Vanguardia</p>
+<footer class="text-center p-4 mt-5">
+    <p>© 2026 Biblioteca del Técnico - Recursos IT de Vanguardia | Noticias y actualidad tecnológica</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!--  scripts publi (adsterra) -->
-<script> atOptions = { 'key' : '1fb61a0ac6eb8bbb639f004b0a94c69c', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> <script src="https://www.highperformanceformat.com/1fb61a0ac6eb8bbb639f004b0a94c69c/invoke.js"></script>
+<!-- Función para expandir/colapsar noticias -->
+<script>
+    function toggleNews(newsId) {
+        const fullContent = document.getElementById(`news-full-${newsId}`);
+        const button = event.currentTarget;
+        const icon = button.querySelector('i');
+        const spanText = button.querySelector('span');
+        
+        if (fullContent.classList.contains('show')) {
+            fullContent.classList.remove('show');
+            spanText.innerText = 'Leer más';
+            icon.className = 'fas fa-chevron-down';
+        } else {
+            fullContent.classList.add('show');
+            spanText.innerText = 'Leer menos';
+            icon.className = 'fas fa-chevron-up';
+        }
+    }
+    
+    // Opcional: Cerrar con click si otro se abre, se puede mejorar pero funciona de manera individual
+</script>
+
+<!-- Anuncio opcional (mantenido) -->
+<script> atOptions = { 'key' : '1fb61a0ac6eb8bbb639f004b0a94c69c', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
+<script src="https://www.highperformanceformat.com/1fb61a0ac6eb8bbb639f004b0a94c69c/invoke.js"></script>
 
 </body>
 </html>
