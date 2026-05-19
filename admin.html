@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin | Biblioteca del Técnico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg: #0a0e13;
+      --surface: #111820;
+      --border: #1e2d3d;
+      --accent: #00c8ff;
+      --accent2: #ff6b35;
+      --text: #e0eaf5;
+      --muted: #4a6278;
+      --success: #00e896;
+      --error: #ff4466;
+      --warning: #ffcc00;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .tag-admin {
+      background: rgba(255,107,53,0.1);
+      border: 1px solid rgba(255,107,53,0.3);
+      color: var(--accent2);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.1em;
+    }
+
+    /* LOGIN ADMIN */
+    #adminLogin {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #adminLogin h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    #adminLogin p {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    /* PANEL */
+    #adminPanel { display: none; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 20px; right: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+
+    .card-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,200,255,0.1);
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    .btn {
+      background: var(--accent);
+      color: #0a0e13;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 24px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #33d4ff;
+      box-shadow: 0 0 16px rgba(0,200,255,0.3);
+    }
+
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-danger {
+      background: transparent;
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+
+    .btn-danger:hover {
+      background: rgba(255,68,102,0.1);
+      box-shadow: none;
+    }
+
+    .message {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      display: none;
+      letter-spacing: 0.03em;
+    }
+
+    .message.error { background: rgba(255,68,102,0.1); border: 1px solid rgba(255,68,102,0.3); color: var(--error); display: block; }
+    .message.success { background: rgba(0,232,150,0.1); border: 1px solid rgba(0,232,150,0.3); color: var(--success); display: block; }
+    .message.warning { background: rgba(255,204,0,0.1); border: 1px solid rgba(255,204,0,0.3); color: var(--warning); display: block; }
+
+    /* USER LIST */
+    .user-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    .user-row:last-child { border-bottom: none; }
+
+    .user-email {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      flex: 1;
+    }
+
+    .user-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      background: rgba(0,232,150,0.1);
+      border: 1px solid rgba(0,232,150,0.2);
+      color: var(--success);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--muted);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      padding: 20px 0;
+    }
+
+    .info-box {
+      background: rgba(0,200,255,0.05);
+      border: 1px solid rgba(0,200,255,0.15);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: #7bb8d4;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <span class="logo">📘 TecnoLib</span>
+    <span class="tag-admin">PANEL ADMIN</span>
+  </div>
+
+  <!-- LOGIN ADMIN -->
+  <div id="adminLogin" class="card">
+    <h2>Acceso Administrador</h2>
+    <p>// Solo vos tenés acceso a este panel</p>
+    <div class="field">
+      <label>Email admin</label>
+      <input type="email" id="adminEmail" placeholder="tu@email.com">
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="adminPass" placeholder="••••••••">
+    </div>
+    <button class="btn" onclick="adminLogin()">Ingresar</button>
+    <div id="loginMsg" class="message"></div>
+  </div>
+
+  <!-- PANEL PRINCIPAL -->
+  <div id="adminPanel">
+
+    <div class="card">
+      <div class="card-title">➕ Crear Acceso para Alumno</div>
+
+      <div class="info-box">
+        Usá esto cuando un alumno pague por Mercado Pago.<br>
+        Ingresá su email y generá una contraseña temporal.<br>
+        El alumno puede cambiarla luego desde su perfil.
+      </div>
+
+      <div class="field">
+        <label>Email del alumno</label>
+        <input type="email" id="newEmail" placeholder="alumno@email.com">
+      </div>
+      <div class="field">
+        <label>Contraseña temporal</label>
+        <input type="text" id="newPass" placeholder="mínimo 6 caracteres" id="newPass">
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn" onclick="createUser()" id="createBtn">Crear acceso →</button>
+        <button class="btn" style="background:var(--surface);border:1px solid var(--border);color:var(--muted);" onclick="genPassword()">
+          🔀 Generar contraseña
+        </button>
+      </div>
+      <div id="createMsg" class="message"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">👥 Alumnos registrados</div>
+      <div id="userList"><div class="empty-state">Cargando...</div></div>
+      <button class="btn" style="margin-top:16px;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:0.7rem;" onclick="loadUsers()">↻ Actualizar lista</button>
+    </div>
+
+    <div style="text-align:right;margin-top:12px;">
+      <button class="btn btn-danger" onclick="adminLogout()">Cerrar sesión admin</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// =============================================
+// CONFIGURACIÓN
+// =============================================
+const SUPABASE_URL = 'https://eritxggcvjffdheksaca.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_n3a0bzLtHPU8ScXfSere-A_Wne9q--Y';
+// Tu email de admin (para verificar que solo vos usés este panel)
+const ADMIN_EMAIL = 'sosservicioscba@email.com';
+// =============================================
+
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Check si admin ya está logueado
+sb.auth.getSession().then(({ data }) => {
+  if (data.session && data.session.user.email === ADMIN_EMAIL) {
+    showPanel();
+    loadUsers();
+  }
+});
+
+async function adminLogin() {
+  const email = document.getElementById('adminEmail').value.trim();
+  const pass = document.getElementById('adminPass').value;
+  const msg = document.getElementById('loginMsg');
+
+  if (email !== ADMIN_EMAIL) {
+    msg.textContent = 'Acceso denegado.';
+    msg.className = 'message error';
+    return;
+  }
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) {
+    msg.textContent = 'Credenciales incorrectas.';
+    msg.className = 'message error';
+  } else {
+    showPanel();
+    loadUsers();
+  }
+}
+
+function showPanel() {
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+}
+
+async function createUser() {
+  const email = document.getElementById('newEmail').value.trim();
+  const pass = document.getElementById('newPass').value;
+  const msg = document.getElementById('createMsg');
+  const btn = document.getElementById('createBtn');
+
+  msg.className = 'message';
+  msg.textContent = '';
+
+  if (!email || !pass) {
+    msg.textContent = 'Completá email y contraseña.';
+    msg.className = 'message error';
+    return;
+  }
+
+  if (pass.length < 6) {
+    msg.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+    msg.className = 'message error';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Creando...';
+
+  // Usamos la Admin API de Supabase via la función de Netlify
+  const res = await fetch('/.netlify/functions/create-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: pass })
+  });
+
+  const result = await res.json();
+  btn.disabled = false;
+  btn.textContent = 'Crear acceso →';
+
+  if (result.error) {
+    msg.textContent = '✗ Error: ' + result.error;
+    msg.className = 'message error';
+  } else {
+    msg.textContent = `✓ Acceso creado para ${email}. Contraseña: ${pass}`;
+    msg.className = 'message success';
+    document.getElementById('newEmail').value = '';
+    document.getElementById('newPass').value = '';
+    loadUsers();
+  }
+}
+
+async function loadUsers() {
+  const container = document.getElementById('userList');
+  container.innerHTML = '<div class="empty-state">Cargando alumnos...</div>';
+
+  const res = await fetch('/.netlify/functions/list-users');
+  const result = await res.json();
+
+  if (result.error || !result.users) {
+    container.innerHTML = '<div class="empty-state">No se pudieron cargar los alumnos.</div>';
+    return;
+  }
+
+  const users = result.users.filter(u => u.email !== ADMIN_EMAIL);
+
+  if (users.length === 0) {
+    container.innerHTML = '<div class="empty-state">No hay alumnos registrados aún.</div>';
+    return;
+  }
+
+  container.innerHTML = users.map(u => {
+    const fecha = new Date(u.created_at).toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric' });
+    return `
+      <div class="user-row">
+        <span class="user-email">${u.email}</span>
+        <span class="user-date">${fecha}</span>
+        <span class="badge">ACTIVO</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function genPassword() {
+  const chars = 'abcdefghjkmnpqrstuvwxyz23456789';
+  let pass = '';
+  for (let i = 0; i < 8; i++) pass += chars[Math.floor(Math.random() * chars.length)];
+  document.getElementById('newPass').value = pass;
+}
+
+async function adminLogout() {
+  await sb.auth.signOut();
+  location.reload();
+}
+</script>
+</body>
+</html>
