@@ -503,8 +503,8 @@ let completedLessons = JSON.parse(localStorage.getItem('completed') || '[]');
 // AUTH CHECK
 sb.auth.getSession().then(({ data }) => {
   if (!data.session) {
-    window.location.href = 'login.html';
-    return;
+    //window.location.href = 'login.html';
+    //return;
   }
   document.getElementById('authGuard').style.display = 'none';
   document.getElementById('userEmail').textContent = data.session.user.email;
