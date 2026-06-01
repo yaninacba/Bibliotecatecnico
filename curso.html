@@ -460,7 +460,7 @@ const COURSE = [
     title: 'Mantenimiento ',
     icon: '🖥️',
     lessons: [
-      { id: 'l16', title: 'Cambio de disco duro', duration: '10 min', video: '0XeCBZjAZ6w' },
+      { id: 'l16', title: 'Cambio de disco duro', duration: '10 min', video: '0XeCBZjAZ6w',desc: 'Procedimiento completo para reemplazar un disco duro en PC y notebook.' },
       { id: 'l2', title: 'Fallas comunes de placa base', duration: '18 min', video: 'dQw4w9WgXcQ', desc: 'Los síntomas más frecuentes y cómo diagnosticarlos paso a paso.' },
       { id: 'l3', title: 'RAM: errores y testeo', duration: '10 min', video: 'dQw4w9WgXcQ', desc: 'Uso de MemTest y diagnóstico de módulos defectuosos.' },
     ]
@@ -595,7 +595,8 @@ function renderPdf() {
     <div class="content-card">
       <h3>📥 Descarga</h3>
       <p>El manual completo en PDF con todas las fallas, códigos de error y soluciones documentadas.</p>
-      <a href="${https://drive.google.com/file/d/1MeyB4pf_9Bz7CiuCTIIovbxXn5DiMH3I/view?usp=sharing}" class="btn-download" target="_blank">
+// BIEN ✅
+<a href="${PDF_URL}"
         📄 Descargar Manual Completo (PDF)
       </a>
     </div>
