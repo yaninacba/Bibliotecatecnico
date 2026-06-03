@@ -473,13 +473,28 @@ const COURSE = [
     ]
   },
   {
-    id: 'm4',
+    id: 'm3',
     title: '📄 Manual Completo PDF',
     icon: '📘',
     lessons: [
       { id: 'l8', title: 'Descargar manual completo', duration: 'PDF', video: null, isPdf: true, desc: 'El manual completo con todas las fallas y soluciones documentadas.' },
     ]
   }
+  {
+    id: 'm5',
+    title: 'Manuales de Notebooks por Marca',
+    icon: '📁',
+    lessons: [
+      { 
+        id: 'l9', 
+        title: 'Ver todos los manuales', 
+        duration: '20+ manuales', 
+        video: null, 
+        isMega: true,
+        desc: 'Manuales técnicos organizados por marca: HP, Dell, Lenovo, Asus, Acer y más.' 
+      },
+    ]
+  },
 ];
 // =============================================
 
@@ -555,8 +570,7 @@ function loadLesson(lesson) {
       <span>📁 ${mod.title}</span>
     </div>
 
-    ${lesson.isPdf ? renderPdf() : renderVideo(lesson)}
-
+     ${lesson.isPdf ? renderPdf() : lesson.isMega ? renderMega() : renderVideo(lesson)}
     <div class="content-card">
       <h3>📋 Descripción</h3>
       <p>${lesson.desc}</p>
@@ -592,6 +606,17 @@ function renderPdf() {
   `;
 }
 
+function renderMega() {
+  return `
+    <div class="content-card">
+      <h3>📁 Manuales de Notebooks</h3>
+      <p>Accedé a todos los manuales técnicos organizados por marca. Se abre en una nueva pestaña.</p>
+      <a href="https://mega.nz/folder/elwi0Kba#zyV7BDlDrRHlKPWFw4uR2Q" class="btn-download" target="_blank">
+        📁 Abrir carpeta de manuales
+      </a>
+    </div>
+  `;
+}
 function markDone(lessonId) {
   if (!completedLessons.includes(lessonId)) {
     completedLessons.push(lessonId);
