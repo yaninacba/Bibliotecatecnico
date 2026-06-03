@@ -489,7 +489,7 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentLesson = null;
 let completedLessons = JSON.parse(localStorage.getItem('completed') || '[]');
 
-//auth
+//autenticacion 
 sb.auth.getSession().then(({ data }) => {
   document.getElementById('authGuard').style.display = 'none';
   if (!data.session) {
@@ -500,6 +500,7 @@ sb.auth.getSession().then(({ data }) => {
   buildSidebar();
   loadLesson(COURSE[0].lessons[0]);
 });
+
 function buildSidebar() {
   const container = document.getElementById('sidebarModules');
   container.innerHTML = '';
