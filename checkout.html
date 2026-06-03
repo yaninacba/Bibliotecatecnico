@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Experto en Soporte Técnico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e13;
+      --surface: #111820;
+      --border: #1e2d3d;
+      --accent: #00c8ff;
+      --accent2: #ff6b35;
+      --text: #e0eaf5;
+      --muted: #4a6278;
+      --success: #00e896;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .glow-top {
+      position: fixed;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+      top: -200px; right: -200px;
+      pointer-events: none;
+    }
+
+    .glow-bottom {
+      position: fixed;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%);
+      bottom: -200px; left: -100px;
+      pointer-events: none;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* LEFT — product summary */
+    .product-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 20px; right: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.4;
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: rgba(0,200,255,0.08);
+      border: 1px solid rgba(0,200,255,0.2);
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .product-icon {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 16px rgba(0,200,255,0.4));
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .product-subtitle {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .features li {
+      font-size: 0.82rem;
+      color: #b0c4d8;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(30,45,61,0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .features li:last-child { border-bottom: none; }
+
+    .features li .feat-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .price-box {
+      background: rgba(0,200,255,0.05);
+      border: 1px solid rgba(0,200,255,0.15);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .price-amount {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .price-note {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--success);
+      margin-top: 4px;
+    }
+
+    /* RIGHT — form */
+    .form-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      position: relative;
+    }
+
+    .form-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 20px; right: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+      opacity: 0.4;
+    }
+
+    .form-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      letter-spacing: 0.04em;
+    }
+
+    .field { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.88rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,200,255,0.1);
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    .btn-pay {
+      width: 100%;
+      background: var(--accent);
+      color: #0a0e13;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-pay:hover {
+      background: #33d4ff;
+      box-shadow: 0 0 24px rgba(0,200,255,0.35);
+    }
+
+    .btn-pay:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .secure-note {
+      text-align: center;
+      margin-top: 14px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .message {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      display: none;
+    }
+
+    .message.error {
+      background: rgba(255,68,102,0.1);
+      border: 1px solid rgba(255,68,102,0.3);
+      color: #ff4466;
+      display: block;
+    }
+
+    .message.success {
+      background: rgba(0,232,150,0.1);
+      border: 1px solid rgba(0,232,150,0.3);
+      color: var(--success);
+      display: block;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .wrapper { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
+
+<div class="wrapper">
+
+  <!-- PANEL IZQUIERDO — Producto -->
+  <div class="product-panel">
+    <div class="product-badge">CURSO PREMIUM</div>
+<img src="tapa_experto_en_soporte_final.png" alt="Experto en Soporte Técnico" style="
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255,0,0,0.3);
+  box-shadow: 0 0 30px rgba(255,0,0,0.15);
+  margin-bottom: 24px;
+  display: block;
+">
+<h2 class="product-title">Experto en Soporte Técnico</h2>
+<p class="product-subtitle">// Guía completa · Edición 2025</p>    <h2 class="product-title">Experto en Soporte Técnico</h2>
+    <p class="product-subtitle">// Guía completa · Edición 2025</p>
+
+    <ul class="features">
+      <li><span class="feat-icon">📄</span> Manual PDF de 31 páginas</li>
+      <li><span class="feat-icon">🎥</span> Videos explicativos incluidos</li>
+      <li><span class="feat-icon">♾️</span> Actualizaciones gratuitas para siempre</li>
+      <li><span class="feat-icon">🔐</span> Acceso de por vida</li>
+      <li><span class="feat-icon">💳</span> Pago seguro por Mercado Pago</li>
+    </ul>
+
+    <div class="price-box">
+      <div>
+        <div class="price-label">Pago único</div>
+        <div class="price-note">✓ Sin suscripción</div>
+      </div>
+      <div style="text-align:right">
+        <div class="price-amount">USD 20</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DERECHO — Formulario -->
+  <div class="form-panel">
+    <h2 class="form-title">Tus datos</h2>
+    <p class="form-sub">// Te enviamos el acceso al curso por email</p>
+
+    <div class="field">
+      <label>Nombre</label>
+      <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="given-name">
+    </div>
+
+    <div class="field">
+      <label>Apellido</label>
+      <input type="text" id="apellido" placeholder="Tu apellido" autocomplete="family-name">
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="tu@email.com" autocomplete="email">
+    </div>
+
+    <button class="btn-pay" id="payBtn" onclick="handleCheckout()">
+      💳 Ir a pagar con Mercado Pago →
+    </button>
+
+    <div id="message" class="message"></div>
+
+    <p class="secure-note">🔒 Tus datos son seguros y no serán compartidos</p>
+
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+  </div>
+
+</div>
+
+<script>
+  const MP_LINK = 'https://mpago.la/1vBsBqn';
+  const ADMIN_EMAIL = 'ytechcordoba@gmail.com';
+
+  async function handleCheckout() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const apellido = document.getElementById('apellido').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const btn = document.getElementById('payBtn');
+    const msg = document.getElementById('message');
+
+    msg.className = 'message';
+    msg.textContent = '';
+
+    if (!nombre || !apellido || !email) {
+      msg.textContent = '✗ Por favor completá todos los campos.';
+      msg.className = 'message error';
+      return;
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+      msg.textContent = '✗ Ingresá un email válido.';
+      msg.className = 'message error';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Redirigiendo...';
+
+    // Enviar datos por email usando FormSubmit (servicio gratuito, sin backend)
+    try {
+      await fetch('https://formsubmit.co/ajax/ytechcordoba@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          nombre: nombre,
+          apellido: apellido,
+          email: email,
+          _subject: `Nuevo checkout — ${nombre} ${apellido}`,
+          _template: 'table'
+        })
+      });
+    } catch(e) {
+      // Si falla el envío igual redirigimos a MP
+    }
+
+    // Redirigir a Mercado Pago
+    window.location.href = MP_LINK;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleCheckout();
+  });
+</script>
+
+</body>
+</html>
