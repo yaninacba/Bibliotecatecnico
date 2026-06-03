@@ -479,7 +479,7 @@ const COURSE = [
     lessons: [
       { id: 'l8', title: 'Descargar manual completo', duration: 'PDF', video: null, isPdf: true, desc: 'El manual completo con todas las fallas y soluciones documentadas.' },
     ]
-  }
+  },
   {
     id: 'm5',
     title: 'Manuales de Notebooks por Marca',
@@ -617,6 +617,7 @@ function renderMega() {
     </div>
   `;
 }
+
 function markDone(lessonId) {
   if (!completedLessons.includes(lessonId)) {
     completedLessons.push(lessonId);
